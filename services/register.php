@@ -15,22 +15,28 @@
 		$data = json_decode(file_get_contents('php://input'), true);
 
 		if( $data['action'] == 'register' ) {
-			$response = array( 'status' => 'failed', 'reason' => '' );
+
+			$response = array( 'status' => 'failed', 'reason' => '', 'customerid' => 0 );
 
 			$resp = $conn->register_member( $data['data'] );
 
 			// incase the customer id return correctly
 			if( ctype_digit($resp) ) {
-				$response['status'] = 'success';
 
-				// email sending
+				$response['status'] = 'success';
+				$response['customerid'] = $resp;
+
+				// email sending to inform customer
 				if( $config['enablemail']) {
+					
 					//inform customer 
 					$mail = new Mailer();
 					$mail->register_completed( $data['data'] );
 
 				} else {
+
 					echo 'Mail not enable';
+
 				}
 
 			} else {

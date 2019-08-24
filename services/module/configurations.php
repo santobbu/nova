@@ -4,7 +4,7 @@ defined( '_VALID_SETTING' ) or die( 'Direct Access to this location is not allow
 /** Database Configuration*/
 define('DB_NAME', 'huawei_nova');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'rootroot');
 define('DB_HOSTNAME', 'localhost');
 
 /** directory absolute path */

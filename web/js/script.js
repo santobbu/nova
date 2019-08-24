@@ -1,9 +1,10 @@
 var hostname = window.location.hostname;
 var protocol = window.location.protocol;
 var slashes = protocol.concat('//');
-var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'huawei/' : 'HuaweiGrandsales/';
+var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'nova/' : '/';
 var host = slashes.concat(hostname) + '/';
 host = host.concat(devPath);
+
 var isEngMode = false;
 var messageKey = 'th';
 
@@ -98,8 +99,7 @@ function register ( event ) {
 
     var payload = {
         'data': {
-            'imei': imeiAll
-            , 'sex': $("#sex").val()
+            'sex': $("#sex").val()
             , 'firstname': $("#firstname").val()
             , 'lastname': $("#lastname").val()
             , 'mobile': $("#mobile").val()

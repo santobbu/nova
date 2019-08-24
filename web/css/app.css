@@ -17,7 +17,8 @@ body {
   padding-left: 15px;
 }
 
-.custom-error, .highlight {
+.custom-error, .highlight,
+.font-red {
 	color: red;
 }
 
@@ -205,4 +206,8 @@ table th {
 
 div.radio {
   cursor: pointer;
+}
+
+.bulltet-inside {
+  padding-left: 16px;
 }

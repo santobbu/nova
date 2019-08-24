@@ -16,7 +16,7 @@
 
 		if( $data['action'] == 'register' ) {
 
-			$response = array( 'status' => 'failed', 'reason' => '', 'customerid' => 0 );
+			$response = array( 'status' => 'failed', 'reason' => '', 'identifier' => 0 );
 
 			$resp = $conn->register_member( $data['data'] );
 
@@ -24,7 +24,7 @@
 			if( ctype_digit($resp) ) {
 
 				$response['status'] = 'success';
-				$response['customerid'] = $resp;
+				$response['identifier'] = $data['data']['identifier'];
 
 				// email sending to inform customer
 				if( $config['enablemail']) {

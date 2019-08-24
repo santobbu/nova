@@ -124,13 +124,18 @@ function register ( event ) {
             , success: function ( response ) {
                 try {
                     var resp = JSON.parse((response || '' ));
-                    if( resp['status'] == 'success' ) {
-                        window.location.href = "./thankyou.html";
-                    } else {
 
+                    if( resp['status'] == 'success' ) {
+
+                        window.location.href = "./thankyou.html?id=" + resp['identifier'];
+
+                    } else {
+                        // TODOL: Add error message to inform user why cannot register
                     }
+
                 } catch (ex) {
                     console.log(ex.stack);
+
                 } finally {
                     registerBtn.prop('disabled', false);
                     H5_loading.hide();
@@ -150,6 +155,13 @@ function register ( event ) {
     event.preventDefault();
     return false;
 };
+
+/**
+**  ========== QR Code Generator =============
+**/
+function getQrCode () {
+
+}
 
 
 /**

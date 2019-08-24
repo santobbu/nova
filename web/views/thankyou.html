@@ -17,9 +17,47 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <script type="text/javascript">
+
+        // Generate QR Code after page loaded 
+        $(document).ready(function() {
+          var customerId = qs('id');
+          	
+          var request = {
+              "frame_name": "no-frame",
+              "qr_code_text": customerId,
+              "image_format": "SVG",
+              "qr_code_logo": "scan-me"
+          };
+
+          $.ajax({
+            url: 'https://api.qr-code-generator.com/v1/create/'
+            , type: "post"
+            , data: JSON.stringify(request)
+            , success: function ( response ) {
+              debugger;
+                try {
+                    var resp = response;
+
+                } catch (ex) {
+                    console.log(ex.stack);
+
+                }
+            }
+            , error: function() {}
+            , complete: function() {}
+          });
+        });
+
         function gotoMain () {
           window.location.href = "http://huaweifestival.com";
         }
+
+        function qs(key) {
+            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
+            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+        }
+
       </script>
   </head>
 
@@ -39,12 +77,20 @@
             <p style="font-size: 16px;">
               ท่านสามารถติดตามการประกาศผลผู้โชคดีได้ที่  <a href="https://www.facebook.com/HuaweimobileTH/">https://www.facebook.com/HuaweimobileTH/</a>
             </p>
+            <div class="qr-code-container">
+              <!-- image qr code here -->
+              <div class="loading">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </div>
+              <img src="logo.jpg" class="qr-code hidden">
+            </div>
           </div>
 
           <div class="form-group">
               <div style="text-align: center;">
                   <button id="confirmBtn" class="register btn btn-primary"
-                  onclick="gotoMain()">กลับสู่เว็บไซต์หลัก</button>
+                    onclick="gotoMain()">กลับสู่เว็บไซต์หลัก
+                  </button>
               </div>
           </div>
             

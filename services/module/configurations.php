@@ -23,7 +23,7 @@ global $config;
 $config['dateformatdb'] = 'Y-m-d H:i:s';
 $config['dateformat'] = 'd/m/Y';
 $config['enablemail'] = true;
-$config['mailreceiver'] = array("iammonkey2929@gmail.com");
+$config['mailreceiver'] = array("huawei.life.th@gmail.com");
 $config['mailform'] = "huawei4.life.th@gmail.com";
 $config['mailformpass'] = "huaweiP@ssw0rd";
 $config['mailsender'] = "ขอบคุณสำหรับการเข้าร่วมกิจกรรม";

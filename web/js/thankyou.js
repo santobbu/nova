@@ -16,7 +16,7 @@ $(document).ready(function() {
       "size": 1000,
       "download": true,
       "file": "png"
-      , 'action': 'thankyou' 
+      , 'action': 'test' 
     };
 
     var settings = {
@@ -80,9 +80,8 @@ $(document).ready(function() {
   function sendEmail (qrUrl) {
     var payload = {
       'data': {
-          'sex': $("#sex").val()
-          , 'customerid': qs('cid')
-          , 'qrUrl': qrUrl
+        'customerid': qs('cid')
+        , 'qrUrl': qrUrl
       }
       , 'action': 'thankyou'        
     };
@@ -94,8 +93,8 @@ $(document).ready(function() {
           , data: JSON.stringify(payload)
           , success: function ( response ) {
               try {
-                  var resp = JSON.parse((response || '' ));
-
+                console.log(response);
+                
               } catch (ex) {
                   console.log(ex.stack);
               }

@@ -33,21 +33,39 @@
 
 			echo json_encode( $response );
 
-		} else if ( $data['action'] == 'thankyou' ) {
-
-			/*// email sending to inform customer
-			if( $config['enablemail']) {
-	
-				//inform customer 
-				$mail = new Mailer();
-				$mail->register_completed( $data['data'] );
-
-			} else {
-				echo 'Mail not enable';
-			}*/
+		} else if ( $data['action'] == 'test' ) {
 
 			$response = array( 'imageUrl' => "//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" );
 			echo json_encode( $response );
+
+		} else if ( $data['action'] == 'thankyou' ) {
+
+			// Update user with qr url 
+			$datainfo = array ();
+			$datainfo['customerid'] = $data['data']['customerid'];
+			$datainfo['qrUrl'] = $data['data']['qrUrl'];
+			$conn->update_item( 'tb_customer', 'customerid', $datainfo );
+
+			// email sending to inform customer
+			if( $config['enablemail']) {
+
+				// get user data for sending email
+				$cusDetail = $conn->get_by_key( 'tb_customer', 'customerid', $datainfo['customerid'] );
+
+				if (isset($cusDetail)) {
+					//inform customer 
+					$mail = new Mailer();
+					$mail->register_completed( $cusDetail );
+					
+				}else {
+					echo 'Cannot sent email user not found';
+				}
+
+			} else {
+				echo 'Mail not enable';
+			}
+
+			echo 'completed';
 
 		} else if( $data['action'] == 'report' ) {
 

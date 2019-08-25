@@ -23,7 +23,8 @@ class Mailer extends mailSenderNew {
 			$content = file_get_contents(  ABSPATH. 'email/template/register_completed.htm' );
 			
 			//receiver detail
-			$content = str_replace('{0:RECEIVER_NAME}', $data['firstname'], $content);  
+			$content = str_replace('{0:RECEIVER_NAME}', $data['firstname'], $content);
+			$content = str_replace('{0:QR_CODE}', $data['qrUrl'], $content);    
 
 			$content = html_entity_decode($content);
 		   	$this->setSubject('ขอขอบคุณที่ร่วมสนุกกับกิจกรรม');

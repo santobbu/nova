@@ -227,6 +227,10 @@ div.radio {
   display: none;
 }
 
+.privacy {
+  margin-top: 16px;
+}
+
 /* loading animation */
 .lds-spinner {
   color: official;

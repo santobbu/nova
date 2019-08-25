@@ -15,82 +15,7 @@
       <script src="../js/jquery-3.2.1.min.js"></script>
       <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <script type="text/javascript">
-
-        // Generate QR Code after page loaded 
-        $(document).ready(function() {
-          var customerId = qs('id');
-          
-          var request = {
-            "data": customerId,
-            "config":{
-              "body":"square",
-              },
-            "size": 1000,
-            "download": true,
-            "file": "png"
-          };
-
-          var settings = {
-            "async": true,
-            "crossDomain": true,
-            "url": "http://localhost/nova/services/register.php", //"https://qrcode-monkey.p.rapidapi.com/qr/custom",
-            "method": "POST",
-            "data": JSON.stringify(request),
-            "headers": {
-              "x-rapidapi-host": "qrcode-monkey.p.rapidapi.com",
-              "x-rapidapi-key": "ddf3376362msh0348c3a4c4e5334p106f9djsn2b51e4dceb66",
-              "content-type": "application/json",
-		          "accept": "application/json"
-            }
-          }
-
-          $.ajax(settings)
-          .done(function (response) {
-            var resp = JSON.parse((response || '' ));
-
-            // show response QR code
-            if (resp && resp.imageUrl) {
-
-              var loading = $('#loading-spinner');
-              var qrImage = $('#qr-image');
-
-              loading.hide();
-              qrImage.attr("src", resp.imageUrl);
-              qrImage.show();
-
-            } else {
-
-              displayWarningMessage();
-
-            }
-          })
-          .error(function (response) {
-
-            displayWarningMessage();
-
-          });
-
-        }); // end $(document).ready
-
-        function displayWarningMessage () {
-          $('#loading-spinner').hide();
-          $('#qr-image').hide();
-          $('#error-message').show();
-        }
-
-        function gotoMain () {
-          window.location.href = "http://huaweifestival.com";
-        }
-
-        function qs(key) {
-            key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
-            var match = location.search.match(new RegExp("[?&]" + key + "=([^&]+)(&|$)"));
-            return match && decodeURIComponent(match[1].replace(/\+/g, " "));
-        }
-
-      </script>
+      <script src="../js/thankyou.js"></script>
   </head>
 
   <body style="font-family: 'prompt';">
@@ -104,23 +29,28 @@
               อีเมล์ยืนยันการลงทะเบียนจะจัดส่งไปยังอีเมล์ที่ท่านได้ให้ข้อมูลไว้
             </p>
             <p style="font-size: 16px;">
-              ขอขอบคุณที่ร่วมสนุกกับกิจกรรม Huawei Grand Sales
+              ขอขอบคุณที่ร่วมสนุกกับกิจกรรม Huawei Nova
             </p>
             <p style="font-size: 16px;">
               ท่านสามารถติดตามการประกาศผลผู้โชคดีได้ที่  <a href="https://www.facebook.com/HuaweimobileTH/">https://www.facebook.com/HuaweimobileTH/</a>
             </p>
             <div class="qr-code-container">
+              
               <!-- image qr code here -->
               <div class="loading" id="loading-spinner">
                 <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
               </div>
+
               <img id="qr-image" 
                 style="display: none;"
                 src="//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" 
                 class="qr-code" />
+
               <h3 style="display: none;" 
                 id="error-message" 
-                class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง</h3>
+                class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง
+              </h3>
+
             </div>
           </div>
 

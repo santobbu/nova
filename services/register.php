@@ -16,7 +16,7 @@
 
 		if( $data['action'] == 'register' ) {
 
-			$response = array( 'status' => 'failed', 'reason' => '', 'identifier' => 0 );
+			$response = array( 'status' => 'failed', 'reason' => '', 'identifier' => 0, 'customerid' => 0 );
 
 			$resp = $conn->register_member( $data['data'] );
 
@@ -25,24 +25,28 @@
 
 				$response['status'] = 'success';
 				$response['identifier'] = $data['data']['identifier'];
-
-				// email sending to inform customer
-				if( $config['enablemail']) {
-					
-					//inform customer 
-					$mail = new Mailer();
-					$mail->register_completed( $data['data'] );
-
-				} else {
-
-					echo 'Mail not enable';
-
-				}
+				$response['customerid'] = $resp ;
 
 			} else {
 				$response['reason'] = $resp;
 			}
 
+			echo json_encode( $response );
+
+		} else if ( $data['action'] == 'thankyou' ) {
+
+			/*// email sending to inform customer
+			if( $config['enablemail']) {
+	
+				//inform customer 
+				$mail = new Mailer();
+				$mail->register_completed( $data['data'] );
+
+			} else {
+				echo 'Mail not enable';
+			}*/
+
+			$response = array( 'imageUrl' => "//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" );
 			echo json_encode( $response );
 
 		} else if( $data['action'] == 'report' ) {
@@ -51,10 +55,6 @@
 			$response['data'] = $conn->get_report( $data['startdate'], $data['enddate'] );
 
 			echo json_encode( $response );
-
-		} else {
-
-			echo json_encode( array( 'imageUrl' => '//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg'));
 		}
 
 	} else {

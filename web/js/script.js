@@ -1,7 +1,7 @@
 var hostname = window.location.hostname;
 var protocol = window.location.protocol;
 var slashes = protocol.concat('//');
-var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'nova/' : '/';
+var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'nova/' : '';
 var host = slashes.concat(hostname) + '/';
 host = host.concat(devPath);
 
@@ -89,13 +89,13 @@ function register ( event ) {
     properties['identifier'] = requireField('identifier');
     properties['accepted'] = requireAcknowledge('accepted');
 
-    for (var prop in properties) {
+    /*for (var prop in properties) {
         if(!properties.hasOwnProperty(prop)) continue;
         if(properties[prop] == false) {
             event.preventDefault();
             return false;
         }
-    }
+    }*/
 
     var payload = {
         'data': {
@@ -116,10 +116,11 @@ function register ( event ) {
     registerBtn.prop('disabled', true);
     H5_loading.show();
 
+    var servicesUrl = host + 'services/register.php';
     try {
         $.ajax({
-            url: host + 'services/register.php'
-            , type: "post"
+            url: servicesUrl
+            , type: "POST"
             , data: JSON.stringify(payload)
             , success: function ( response ) {
                 try {

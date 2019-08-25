@@ -23,14 +23,18 @@
           var customerId = qs('id');
           	
           var request = {
-              "frame_name": "no-frame",
-              "qr_code_text": customerId,
-              "image_format": "SVG",
-              "qr_code_logo": "scan-me"
+              'access-token': 'fba0adfbde29b5085eb9207cb5db8a85feb2a456',
+              'frame_name': 'no-frame',
+              'qr_code_text': customerId,
+              'image_format': 'SVG',
+              'qr_code_logo': 'scan-me',
+              'download': 1,
           };
 
+          // https://api.qr-code-generator.com/v1/codes?access-token=AACjOMyzk7PF7EqZk02adcq6vuSX-dsF_d2HOKwBDm5uL-c99LJ8gfZxJLk6hcfS&status=active&page=1&per-page=10&sort=-created&expand=folder%2ClastFrameTemplate%2Cstyle%2Ccampaign&rnd=1566665692038
+
           $.ajax({
-            url: 'https://api.qr-code-generator.com/v1/create/'
+            url: 'https://api.qr-code-generator.com/v1/create'
             , type: "post"
             , data: JSON.stringify(request)
             , success: function ( response ) {

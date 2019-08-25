@@ -26,10 +26,9 @@ class Mailer extends mailSenderNew {
 			$content = str_replace('{0:RECEIVER_NAME}', $data['firstname'], $content);  
 
 			$content = html_entity_decode($content);
-		   	$this->setSubject('ขอขอบคุณที่ร่วมสนุกกับกิจกรรม Huawei Grand Sales');
+		   	$this->setSubject('ขอขอบคุณที่ร่วมสนุกกับกิจกรรม');
 	    	$this->setBody( $content );
-	    	/*echo 'mail detail ' . $content;
-	    	echo '----------------------------------';*/
+
 		   	$this->send();
 	    }
 	}

@@ -43,7 +43,7 @@
 			// Update user with qr url 
 			$datainfo = array ();
 			$datainfo['customerid'] = $data['data']['customerid'];
-			$datainfo['qrUrl'] = $data['data']['qrUrl'];
+			$datainfo['qrurl'] = $data['data']['qrurl'];
 			$conn->update_item( 'tb_customer', 'customerid', $datainfo );
 
 			// email sending to inform customer
@@ -56,7 +56,7 @@
 					//inform customer 
 					$mail = new Mailer();
 					$mail->register_completed( $cusDetail );
-					
+
 				}else {
 					echo 'Cannot sent email user not found';
 				}

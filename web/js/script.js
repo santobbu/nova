@@ -133,7 +133,7 @@ function register ( event ) {
 
                     if( resp['status'] == 'success' ) {
 
-                        window.location.href = './thankyou.html?id=' + resp['identifier'] + 'cid=' + resp['customerid'];
+                        window.location.href = './thankyou.html?id=' + resp['identifier'] + '&cid=' + resp['customerid'];
 
                     } else {
                         // TODOL: Add error message to inform user why cannot register

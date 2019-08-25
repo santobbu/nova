@@ -81,7 +81,7 @@ $(document).ready(function() {
     var payload = {
       'data': {
         'customerid': qs('cid')
-        , 'qrUrl': qrUrl
+        , 'qrurl': qrUrl
       }
       , 'action': 'thankyou'        
     };
@@ -94,7 +94,7 @@ $(document).ready(function() {
           , success: function ( response ) {
               try {
                 console.log(response);
-                
+
               } catch (ex) {
                   console.log(ex.stack);
               }

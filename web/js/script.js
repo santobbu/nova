@@ -17,6 +17,10 @@ var errorMessage = {
         'th': 'กรุณากรอกข้อมูลให้ครบถ้วน',
         'eng': 'This is required field.'
     }
+    , 'iden': {
+        'th': 'เลขประจำตัวประชาชนไม่ถูกต้อง',
+        'eng': 'Invalid format, please check.'
+    }
     , 'mobl_fm': {
         'th': 'รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง',
         'eng': 'Invalid format, please check.'
@@ -39,7 +43,8 @@ $(document).ready(function() {
 
     $("#firstname").on( "blur", requireField.bind(this, 'firstname') );
     $("#lastname").on( "blur", requireField.bind(this, 'lastname') );
-    $("#identifier").on( "blur", requireField.bind(this, 'identifier') );
+
+    $("#identifier").on( "blur", validateIdentifier.bind(this, 'identifier') );
 
     $("#email").on( "blur", validateEmail.bind(this, 'email') );
     $("#mobile").on( "blur", validateMobile.bind(this, 'mobile') );
@@ -86,16 +91,16 @@ function register ( event ) {
     properties['lastname'] = requireField('lastname');
     properties['email'] = validateEmail('email');
     properties['mobile'] = validateMobile('mobile');
-    properties['identifier'] = requireField('identifier');
+    properties['identifier'] = validateIdentifier('identifier');
     properties['accepted'] = requireAcknowledge('accepted');
 
-    /*for (var prop in properties) {
+    for (var prop in properties) {
         if(!properties.hasOwnProperty(prop)) continue;
         if(properties[prop] == false) {
             event.preventDefault();
             return false;
         }
-    }*/
+    }
 
     var payload = {
         'data': {
@@ -168,6 +173,37 @@ function getQrCode () {
 /**
 **  ========== Validation =============
 **/
+
+function validateIdentifier(id) {
+    var targetDiv = $("#" + id);
+    if(targetDiv.length == 0) {
+        return true;
+    }
+    var container = targetDiv.closest("div");
+    var glypIcon = $("#glypcn" + id);
+
+    var x = new String(targetDiv.val());
+    splitext = x.split('');
+    var total = 0;
+    var mul = 13;
+
+    for(i = 0; i < splitext.length-1; i++) {
+        total = total + splitext[i] * mul;
+        mul = mul -1;
+    }
+    
+    var mod = total % 11;
+    var nsub = 11 - mod;
+    var mod2 = nsub % 10;
+    
+    var isValid = mod2 == splitext[12];
+
+    if(!isValid) {
+        return onInValidControl( id, container, glypIcon, 'iden' );
+    } else {
+        return onValidControl( id, container, glypIcon );
+    }
+}
 
 function requireField( id ) {
     var targetDiv = $("#" + id);

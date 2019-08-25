@@ -231,6 +231,10 @@ div.radio {
   margin-top: 16px;
 }
 
+.form-group .radio.no-margin {
+  margin: 0;
+}
+
 /* loading animation */
 .lds-spinner {
   color: official;

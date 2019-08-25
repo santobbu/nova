@@ -106,7 +106,7 @@ function register ( event ) {
             , 'email': $("#email").val()
             , 'identifier': $("#identifier").val()
             , 'address': $("#address").val()
-            , 'color': $("#color").val()
+            , 'color': $('input[name=color]:checked').val()
             , 'accepted': $("#accepted").val()     
         }
         , 'action': 'register'        

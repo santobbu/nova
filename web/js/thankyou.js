@@ -16,14 +16,14 @@ $(document).ready(function() {
       "size": 1000,
       "download": true,
       "file": "png"
-      , 'action': 'test' 
+      // , 'action': 'test' 
     };
 
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": host + 'services/register.php', 
-      // "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
+      //"url": host + 'services/register.php', 
+      "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
       "method": "POST",
       "data": JSON.stringify(request),
       "headers": {
@@ -40,10 +40,10 @@ $(document).ready(function() {
       try {
         var resp = response && JSON.parse((response || '' ));
       } catch(e) {
-        resp = null;
+        resp = response;
       }
     // show response QR code
-      if (resp && resp.imageUrl || true) {
+      if (resp && resp.imageUrl) {
         var loading = $('#loading-spinner');
         var qrImage = $('#qr-image');
 

@@ -21,36 +21,64 @@
         // Generate QR Code after page loaded 
         $(document).ready(function() {
           var customerId = qs('id');
-          	
+          
           var request = {
-              'access-token': 'fba0adfbde29b5085eb9207cb5db8a85feb2a456',
-              'frame_name': 'no-frame',
-              'qr_code_text': customerId,
-              'image_format': 'SVG',
-              'qr_code_logo': 'scan-me',
-              'download': 1,
+            "data": customerId,
+            "config":{
+              "body":"square",
+              },
+            "size": 1000,
+            "download": true,
+            "file": "png"
           };
 
-          // https://api.qr-code-generator.com/v1/codes?access-token=AACjOMyzk7PF7EqZk02adcq6vuSX-dsF_d2HOKwBDm5uL-c99LJ8gfZxJLk6hcfS&status=active&page=1&per-page=10&sort=-created&expand=folder%2ClastFrameTemplate%2Cstyle%2Ccampaign&rnd=1566665692038
-
-          $.ajax({
-            url: 'https://api.qr-code-generator.com/v1/create'
-            , type: "post"
-            , data: JSON.stringify(request)
-            , success: function ( response ) {
-              debugger;
-                try {
-                    var resp = response;
-
-                } catch (ex) {
-                    console.log(ex.stack);
-
-                }
+          var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "http://localhost/nova/services/register.php", //"https://qrcode-monkey.p.rapidapi.com/qr/custom",
+            "method": "POST",
+            "data": JSON.stringify(request),
+            "headers": {
+              "x-rapidapi-host": "qrcode-monkey.p.rapidapi.com",
+              "x-rapidapi-key": "ddf3376362msh0348c3a4c4e5334p106f9djsn2b51e4dceb66",
+              "content-type": "application/json",
+		          "accept": "application/json"
             }
-            , error: function() {}
-            , complete: function() {}
+          }
+
+          $.ajax(settings)
+          .done(function (response) {
+            var resp = JSON.parse((response || '' ));
+
+            // show response QR code
+            if (resp && resp.imageUrl) {
+
+              var loading = $('#loading-spinner');
+              var qrImage = $('#qr-image');
+
+              loading.hide();
+              qrImage.attr("src", resp.imageUrl);
+              qrImage.show();
+
+            } else {
+
+              displayWarningMessage();
+
+            }
+          })
+          .error(function (response) {
+
+            displayWarningMessage();
+
           });
-        });
+
+        }); // end $(document).ready
+
+        function displayWarningMessage () {
+          $('#loading-spinner').hide();
+          $('#qr-image').hide();
+          $('#error-message').show();
+        }
 
         function gotoMain () {
           window.location.href = "http://huaweifestival.com";
@@ -83,10 +111,16 @@
             </p>
             <div class="qr-code-container">
               <!-- image qr code here -->
-              <div class="loading">
+              <div class="loading" id="loading-spinner">
                 <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
               </div>
-              <img src="logo.jpg" class="qr-code hidden">
+              <img id="qr-image" 
+                style="display: none;"
+                src="//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" 
+                class="qr-code" />
+              <h3 style="display: none;" 
+                id="error-message" 
+                class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง</h3>
             </div>
           </div>
 

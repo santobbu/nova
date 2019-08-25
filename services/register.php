@@ -51,6 +51,10 @@
 			$response['data'] = $conn->get_report( $data['startdate'], $data['enddate'] );
 
 			echo json_encode( $response );
+
+		} else {
+
+			echo json_encode( array( 'imageUrl' => '//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg'));
 		}
 
 	} else {

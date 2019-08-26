@@ -13,24 +13,23 @@ $(document).ready(function() {
       "config":{
         "body":"square",
         },
-      "size": 1000,
       "download": true,
       "file": "png"
-      // , 'action': 'test' 
+       , 'action': 'test' 
     };
 
     var settings = {
       "async": true,
       "crossDomain": true,
-      //"url": host + 'services/register.php', 
-      "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
+      "url": host + 'services/register.php', 
+      // "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
       "method": "POST",
       "data": JSON.stringify(request),
       "headers": {
         "x-rapidapi-host": "qrcode-monkey.p.rapidapi.com",
         "x-rapidapi-key": "ddf3376362msh0348c3a4c4e5334p106f9djsn2b51e4dceb66",
         "content-type": "application/json",
-            "accept": "application/json"
+        "accept": "application/json"
       }
     }
 

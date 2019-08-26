@@ -35,29 +35,7 @@
 
 		} else if ( $data['action'] == 'test' ) {
 
-			$qrcodePath = "https://api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg";
-			$target = ABSPATH. 'qrcode/2.svg';
-			$response = array( 'imageUrl' => "//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" );
-
-			// echo substr(strrchr($qrcodePath,'.'), 1);
-
-			// test to save image into server
-			$file = fopen ($qrcodePath , 'rb');
-			if ($file) {
-				$newf = fopen ($target, 'wb');
-				if ($newf) {
-					while(!feof($file)) {
-						fwrite($newf, fread($file, 1024 * 8), 1024 * 8);
-					}
-				}
-			}
-			if ($file) {
-				fclose($file);
-			}
-			if ($newf) {
-				fclose($newf);
-			}
-			
+			$response = array( 'imageUrl' => "//api.qrcode.studio/tmp/7138cdb43bd3c8809bde22caffe2a173.png" );
 			echo json_encode( $response );
 
 		} else if ( $data['action'] == 'thankyou' ) {

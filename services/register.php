@@ -35,7 +35,29 @@
 
 		} else if ( $data['action'] == 'test' ) {
 
+			$qrcodePath = "https://api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg";
+			$target = ABSPATH. 'qrcode/2.svg';
 			$response = array( 'imageUrl' => "//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" );
+
+			// echo substr(strrchr($qrcodePath,'.'), 1);
+
+			// test to save image into server
+			$file = fopen ($qrcodePath , 'rb');
+			if ($file) {
+				$newf = fopen ($target, 'wb');
+				if ($newf) {
+					while(!feof($file)) {
+						fwrite($newf, fread($file, 1024 * 8), 1024 * 8);
+					}
+				}
+			}
+			if ($file) {
+				fclose($file);
+			}
+			if ($newf) {
+				fclose($newf);
+			}
+			
 			echo json_encode( $response );
 
 		} else if ( $data['action'] == 'thankyou' ) {
@@ -46,6 +68,27 @@
 			$datainfo['qrurl'] = $data['data']['qrurl'];
 			$conn->update_item( 'tb_customer', 'customerid', $datainfo );
 
+			// save file to server
+			$qrcodePath = "https:" . $datainfo['qrurl'];
+			$fileExt = substr(strrchr($qrcodePath, '.'), 1);
+			$target = ABSPATH. 'qrcode/' . $datainfo['customerid'] . '.' . $fileExt;
+
+			$file = fopen ($qrcodePath , 'rb');
+			if ($file) {
+				$newf = fopen ($target, 'wb');
+				if ($newf) {
+					while(!feof($file)) {
+						fwrite($newf, fread($file, 1024 * 8), 1024 * 8);
+					}
+				}
+			}
+			if ($file) {
+				fclose($file);
+			}
+			if ($newf) {
+				fclose($newf);
+			}
+
 			// email sending to inform customer
 			if( $config['enablemail']) {
 
@@ -53,6 +96,8 @@
 				$cusDetail = $conn->get_by_key( 'tb_customer', 'customerid', $datainfo['customerid'] );
 
 				if (isset($cusDetail)) {
+					$cusDetail['qrpath'] = $datainfo['customerid'] . '.' . $fileExt;; 
+
 					//inform customer 
 					$mail = new Mailer();
 					$mail->register_completed( $cusDetail );

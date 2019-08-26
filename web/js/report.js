@@ -1,7 +1,7 @@
 var hostname = window.location.hostname;
 var protocol = window.location.protocol;
 var slashes = protocol.concat('//');
-var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'huawei/' : 'HuaweiGrandsales/';
+var devPath = (hostname == '127.0.0.1' || hostname == 'localhost') ? 'nova/' : '';
 var host = slashes.concat(hostname) + '/';
 host = host.concat(devPath);
 
@@ -9,16 +9,15 @@ $(document).ready(function() {
     fixHostBug ();
     
     var today = new Date().toISOString().split('T')[0] + ' 09:00';
-    //$("#startdate").val(new Date(today));
     $("#submitBtn").on( "click", submit);
 });
 
 function fixHostBug () {
-    var bugurl = window.location.host + window.location.pathname;
+    /*var bugurl = window.location.host + window.location.pathname;
     var target = 'campaign.consumer.huawei.com/th/registermate9/web/views/register.html';
     if(bugurl == target) {
         window.location = 'http://campaign.consumer.huawei.com/th/registermate9';
-    }
+    }*/
 }
 
 
@@ -60,13 +59,14 @@ function submit ( event ) {
                             var item = rows[i];
                             var row = $('<tr>');
                             row.append($('<td>' +  (i + 1) + '</td>'));
-                            row.append($('<td>' + item['imei'] + '</td>'));
+                            row.append($('<td>' + item['identifier'] + '</td>'));
                             row.append($('<td>' + item['prefix'] + '</td>'));
                             row.append($('<td>' + item['firstname'] + '</td>'));
                             row.append($('<td>' + item['lastname'] + '</td>'));
                             row.append($('<td>' + item['email'] + '</td>'));
                             row.append($('<td>' + item['mobile'] + '</td>'));
-                            row.append($('<td>' + item['purchaseddate'] + '</td>'));
+                            row.append($('<td>' + item['colorname'] + '</td>'));
+                            row.append($('<td><a target="_blank" href="' + item['qrurl'] + '">Click</a></td>'));
                             row.append($('<td>' + item['createddate'] + '</td>'));
                             bodyTable.append(row);
                         }

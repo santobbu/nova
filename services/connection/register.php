@@ -53,7 +53,10 @@ class Register extends common {
 	function get_report( $startdate, $enddate ) {
 		$cmd  = "SELECT cus.* ";
 		$cmd  .= ", CASE WHEN cus.sex = 1 THEN 'นาย' WHEN cus.sex = 2 THEN 'นาง' WHEN cus.sex = 3 THEN 'นางสาว' END AS prefix ";
+		$cmd  .= ", cor.name AS colorname ";
 		$cmd  .= "FROM tb_customer cus  ";
+		$cmd  .= "LEFT JOIN tb_color cor  ";
+		$cmd  .= "	ON cus.color = cor.colorid  ";
 		$cmd  .= "WHERE 1 = 1 ";
 		if (!empty($startdate)) {
 			$cmd  .= "AND cus.createddate >= '". $startdate ."' ";

@@ -55,47 +55,34 @@
     </script>
   </head>
 
-  <body style="font-family: 'prompt';">
+  <body style="font-family: 'prompt'; background-color: black !important; padding: 0; margin: 0;">
 
-        <div class="container">
-          <img src="logo.jpg" width="100%">
+    <div class="container">
+        <!--div class="thankyou__header"></div-->
+        <img width="100%" src="./thankyou-hd.png">
 
-          <div style="padding: 25px;">
-            <h3>ขอบคุณที่ลงทะเบียน</h3>
-
-            <p style="font-size: 16px;">
-                นำ QR CODE มาวันที่ 15 ก.ย. นี้ ณ.ลานกิจกรรมทางเชื่อม BTS Siam Square One เวลา 10:00 - 20:00 น.
-            </p>
-
-            <div class="qr-code-container">
-              
-              <!-- image qr code here -->
-              <div class="loading" id="loading-spinner">
-                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-              </div>
-
-              <img id="qr-image" 
-                style="display: none;"
-                src="//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" 
-                class="qr-code" />
-
-              <h3 style="display: none;" 
-                id="error-message" 
-                class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง
-              </h3>
-
+        <div class="qr-code-container">
+            
+            <div class="loading" id="loading-spinner">
+              <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
-          </div>
 
-          <!--div class="form-group">
-              <div style="text-align: center;">
-                  <button id="confirmBtn" class="register btn btn-primary"
-                    onclick="gotoMain()">กลับสู่เว็บไซต์หลัก
-                  </button>
-              </div>
-          </div>-->
+            <img id="qr-image" 
+              style="display: none;"
+              src="//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" 
+              class="qr-code" />
+
+            <h3 style="display: none;" 
+              id="error-message" 
+              class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง
+            </h3>
             
         </div>
+
+        <img width="100%" src="./thankyou-ft.png">
+        <!--div class="thankyou__footer"></div-->
+
+    </div>
 
   </body>
 </html>

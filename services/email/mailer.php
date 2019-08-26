@@ -24,7 +24,7 @@ class Mailer extends mailSenderNew {
 			
 			//receiver detail
 			$content = str_replace('{0:RECEIVER_NAME}', $data['firstname'], $content);
-			$content = str_replace('{0:QR_CODE}', $data['qrurl'], $content);    
+			$content = str_replace('{0:QR_CODE}', ("src=\"https:" . $data['qrurl'] . "\""), $content);    
 
 			$content = html_entity_decode($content);
 		   	$this->setSubject('ขอขอบคุณที่ร่วมสนุกกับกิจกรรม');

@@ -10,19 +10,19 @@ $(document).ready(function() {
     
     var request = {
       "data": customerId,
-      "config":{
+      "config": {
         "body":"square",
-        },
+      },
       "download": true,
       "file": "png"
-       , 'action': 'test' 
+       // , 'action': 'test' 
     };
 
     var settings = {
       "async": true,
       "crossDomain": true,
-      "url": host + 'services/register.php', 
-      // "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
+      // "url": host + 'services/register.php', 
+      "url": "https://qrcode-monkey.p.rapidapi.com/qr/custom",
       "method": "POST",
       "data": JSON.stringify(request),
       "headers": {

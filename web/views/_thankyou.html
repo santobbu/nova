@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Huawei Customer Registration</title>
+      <link href="../css/app.css" rel="stylesheet">
+      <link href="../css/bootstrap.min.css" rel="stylesheet">
+      <link href="../css/bootstrap-theme.min.css" rel="stylesheet">
+      <link href="../fonts/glyphicons-halflings-regular.eot" rel="stylesheet">
+      <link href="../fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+      <link href="../fonts/glyphicons-halflings-regular.ttf" rel="stylesheet">
+      <link href="../fonts/glyphicons-halflings-regular.woff" rel="stylesheet">
+
+      <script src="../js/jquery-3.2.1.min.js"></script>
+      <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <script src="../js/thankyou.js"></script>
+  </head>
+
+  <body style="font-family: 'prompt';">
+
+        <div class="container">
+          <img src="logo.jpg" width="100%">
+
+          <div style="padding: 25px;">
+            <h3>ขอบคุณที่ลงทะเบียน</h3>
+
+            <p style="font-size: 16px;">
+                นำ QR CODE มาวันที่ 15 ก.ย. นี้ ณ.ลานกิจกรรมทางเชื่อม BTS Siam Square One เวลา 10:00 - 20:00 น.
+            </p>
+
+            <div class="qr-code-container">
+              
+              <!-- image qr code here -->
+              <div class="loading" id="loading-spinner">
+                <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+              </div>
+
+              <img id="qr-image" 
+                style="display: none;"
+                src="//api.qrcode.studio/tmp/42ba9c27fcd94c5b2db34e68709b3fd6.svg" 
+                class="qr-code" />
+
+              <h3 style="display: none;" 
+                id="error-message" 
+                class="custom-error">ไม่สามารถโหลด QR Code ได้ กรุณาลงทะเบียนใหม่อีกครั้ง
+              </h3>
+
+            </div>
+          </div>
+
+          <!--div class="form-group">
+              <div style="text-align: center;">
+                  <button id="confirmBtn" class="register btn btn-primary"
+                    onclick="gotoMain()">กลับสู่เว็บไซต์หลัก
+                  </button>
+              </div>
+          </div>-->
+            
+        </div>
+
+  </body>
+</html>

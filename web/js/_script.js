@@ -175,9 +175,6 @@ function getQrCode () {
 **/
 
 function validateIdentifier(id) {
-
-    return true;
-
     var targetDiv = $("#" + id);
     if(targetDiv.length == 0) {
         return true;

@@ -18,8 +18,8 @@ var errorMessage = {
         'eng': 'This is required field.'
     }
     , 'iden': {
-        'th': 'เลขประจำตัวประชาชนไม่ถูกต้อง',
-        'eng': 'Invalid format, please check.'
+        'th': 'ID Card นี้ได้ถูกใช้ลงทะเบียนแล้ว',
+        'eng': 'ID Card was used'
     }
     , 'mobl_fm': {
         'th': 'รูปแบบหมายเลขโทรศัพท์ไม่ถูกต้อง',
@@ -176,8 +176,6 @@ function getQrCode () {
 
 function validateIdentifier(id) {
 
-    return true;
-
     var targetDiv = $("#" + id);
     if(targetDiv.length == 0) {
         return true;
@@ -185,6 +183,20 @@ function validateIdentifier(id) {
     var container = targetDiv.closest("div");
     var glypIcon = $("#glypcn" + id);
 
+    var targetVal = targetDiv.val();
+    if(targetVal == null || targetVal == "") {
+        return onInValidControl( id, container, glypIcon, 'rq');
+    } else {
+        var isAvailable = isIdentifierAvailable(targetVal);
+        if (!isAvailable) {
+            return onInValidControl( id, container, glypIcon, 'iden' );
+        } else {
+            return onValidControl( id, container, glypIcon );
+        }
+    }
+}
+
+function validateIdentifierFormat() {
     var x = new String(targetDiv.val());
     splitext = x.split('');
     var total = 0;
@@ -199,13 +211,36 @@ function validateIdentifier(id) {
     var nsub = 11 - mod;
     var mod2 = nsub % 10;
     
-    var isValid = mod2 == splitext[12];
+    return mod2 == splitext[12];
+}
 
-    if(!isValid) {
-        return onInValidControl( id, container, glypIcon, 'iden' );
-    } else {
-        return onValidControl( id, container, glypIcon );
+function isIdentifierAvailable(identifier) {
+    try {
+        var payload = {
+            'identifier': identifier,
+            'action': 'identifier'
+        };
+
+        var result = true;
+        
+        $.ajax({
+            url: host + 'services/register.php',
+            type: "post",
+            async: false,
+            data: JSON.stringify(payload),
+            success: function ( response ) {
+                result = response == 'ok';
+            },
+            error: function() {
+                result = false;
+            }
+        });
     }
+    catch (err) {
+        result = false;
+    }
+
+    return result;
 }
 
 function requireField( id ) {

@@ -96,6 +96,20 @@
 			$response['data'] = $conn->get_report( $data['startdate'], $data['enddate'] );
 
 			echo json_encode( $response );
+		} else if( $data['action'] == 'identifier' ) {
+
+			$resp = $conn->get_by_key( 'tb_customer', 'identifier', $data['identifier'] );
+			
+			if( !empty($resp) ) {
+				echo 'used';
+			} else {
+				echo 'ok';
+			}
+
+		} else {
+
+			echo 'Invalid Action';
+	
 		}
 
 	} else {

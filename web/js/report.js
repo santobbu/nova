@@ -10,6 +10,9 @@ $(document).ready(function() {
     
     var today = new Date().toISOString().split('T')[0] + ' 09:00';
     $("#submitBtn").on( "click", submit);
+
+    // $( "#startdate" ).datepicker();
+    // $( "#enddate" ).datepicker();
 });
 
 function fixHostBug () {

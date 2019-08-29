@@ -62,7 +62,7 @@ class Register extends common {
 			$cmd  .= "AND cus.createddate >= '". $startdate ."' ";
 		}
 		if (!empty($enddate)) {
-			$cmd  .= "AND cus.createddate < '". $enddate ."' ";
+			$cmd  .= "AND cus.createddate < '". $enddate ." 23:59' ";
 		}
 		$cmd  .= "ORDER by cus.createddate ";
 

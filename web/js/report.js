@@ -56,7 +56,17 @@ function submit ( event ) {
 
                         var rows = resp['data'] || [];
                         for (var i = 0; i < rows.length; i++) {
+
                             var item = rows[i];
+                            var dateItem = item['createddate'];
+                            var dateArr = dateItem && dateItem.split(' ');
+                            var dateString = '', timeString = '';
+                            if (dateArr && dateArr.length >= 2) {
+                                var dateObj = new Date(dateArr[0]);
+                                dateString = dateObj.toLocaleString().split(' ')[0];
+                                timeString = dateArr[1] && dateArr[1].length > 6 ? dateArr[1].slice(0, 5) : '';
+                            }
+
                             var row = $('<tr>');
                             row.append($('<td>' +  (i + 1) + '</td>'));
                             row.append($('<td>' + item['identifier'] + '</td>'));
@@ -67,7 +77,8 @@ function submit ( event ) {
                             row.append($('<td>' + item['mobile'] + '</td>'));
                             row.append($('<td>' + item['colorname'] + '</td>'));
                             row.append($('<td><a target="_blank" href="' + item['qrurl'] + '">Click</a></td>'));
-                            row.append($('<td>' + item['createddate'] + '</td>'));
+                            row.append($('<td>' + dateString + '</td>'));
+                            row.append($('<td>' + timeString + '</td>'));
                             bodyTable.append(row);
                         }
 
